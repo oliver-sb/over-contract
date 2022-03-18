@@ -6,6 +6,7 @@ import "hardhat/console.sol";
 contract SignedHeader {
 	bytes private signed;
 	string private appHash;
+	bytes32 private appHashBytes;
 	string private bnHash;
 	uint256 private blockNumber;
 
@@ -49,6 +50,7 @@ contract SignedHeader {
 		blockNumber = bn;
 		bnHash = toHex(output[0]);
 		appHash = toHex(output[1]);
+		appHashBytes = output[1];
     }
 
 	function getSigned() public view returns (string memory) {
@@ -61,6 +63,10 @@ contract SignedHeader {
 
 	function getAppHash() public view returns (string memory) {
 		return appHash;
+	}
+
+	function getAppHashBytes() public view returns (bytes32) {
+		return appHashBytes;
 	}
 
 	function getBnHash() public view returns (string memory) {
